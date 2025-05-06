@@ -1,6 +1,10 @@
 package com.unify;
 
+import java.util.Arrays;
+
 import com.unify.service.PricingService;
+import com.unify.service.discount.AppleOffer;
+import com.unify.service.discount.SoupBreadOffer;
 import com.unify.service.util.Basket;
 
 public class PriceBasket {
@@ -17,9 +21,11 @@ public class PriceBasket {
 				 basket.addItem(arg);
 			 }
 			 
-			 PricingService service = new PricingService();
-			 
-			 System.out.println(service.priceBasket(basket));
+			 PricingService service = new PricingService(
+		                Arrays.asList(new AppleOffer(), new SoupBreadOffer())
+		            );
+			 service.calculateFinalPrice(basket);
+
 		} catch (IllegalArgumentException e) {
             System.err.println("Problem occured when pricing the basket " + e.getMessage());
         }
